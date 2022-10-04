@@ -1,3 +1,12 @@
+document.write(`
+answer = {
+    x: 20,
+    y: 20,
+    z: 30,
+    k: 23,
+    p: 13
+}`)
+
 function convert(object) {
     let newObj = {};
     for (let key in object) {
@@ -45,15 +54,15 @@ console.log(convert(phrase))
 function recursiveConvert(object) {
     let newObj = {};
     for (let key in object) {
-        if (typeof object[key] !== `object`) {
-            newObj[key] = object[key];
+        if (typeof object[key] === `object`) {
+            Object.assign(newObj, recursiveConvert(object[key]));
         } else {
-            return Object.assign(newObj, recursiveConvert(object[key]));
+            newObj[key] = object[key];
         }
     }
     return newObj;
 }
 
-console.log(`try recursive`)
-console.log(recursiveConvert(phrase))
-
+console.log(`try recursive`);
+console.log(recursiveConvert(phrase));
+console.log(recursiveConvert(obj));
